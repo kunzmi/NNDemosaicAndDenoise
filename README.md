@@ -11,7 +11,7 @@ But let’s start slowly...
 ### The problem
 The camera’s sensor cannot detect color of the light that falls on each pixel: Without color filters a sensor would give only a brightness or luminance information, i.e. a gray scale image. To obtain color information, every pixel is covered with a color filter that only lets light through of a certain color: Red, Green or Blue ([Wikipedia](https://en.wikipedia.org/wiki/Bayer_filter)). 
 
-![BayerPattern](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern.png "Bayer pattern")
+![BayerPattern](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern.png?raw=true "Bayer pattern")
 
 A full color image is than obtained by interpolating the surrounding pixels for missing color information in one pixel, a process called demosaicing. 
 Rendering of a full color image is further not only restricted by two missing color components per pixel but also by the amount of noise that every sensor has, noise that increases with amplified sensitivity of the sensor. Shooting photos at base ISO adds only little amount of noise for my camera, whereas at ISO 6400 noise is a severe image quality deterioration source.
@@ -95,133 +95,133 @@ If the camera performed corrections for the lens used, I reprocessed the RAW ima
 Side note: all images are photos that I made (except lighthouse) and I make them publicly available as RAW files so that everyone can play with the neural network, but for nothing more. I don’t grant here any license for reuse, publishing on other places or any modifications. If you like them, feel free to let me know what you want to do with them, I usually don’t bite :)
 
 ## ISO 100
-![](/images/0888.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/0888Noisy.png?raw=true" width="400" height="400"> | <img src="/images/0888Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/0888K3.png?raw=true" width="400" height="400"> | <img src="/images/0888Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 Artifacts on bright light spots:
 
-![](/images/7196.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/7196.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/7196Noisy.png?raw=true" width="400" height="400"> | <img src="/images/7196Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/7196Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/7196Result.png?raw=true" width="400" height="400"> |
 |  | Note the checker board artifacts |
 
 
 ## ISO 200
-![](/images/0902.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0902.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/0902Noisy.png?raw=true" width="400" height="400"> | <img src="/images/0902Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0902Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0902Result.png?raw=true" width="400" height="400"> |
 
 
-![](/images/2386.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2386.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/2386Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2386Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/2386K3.png?raw=true" width="400" height="400"> | <img src="/images/2386Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2386Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2386Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2386K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2386Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 ## ISO 400
-![](/images/3028.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3028.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/3028Noisy.png?raw=true" width="400" height="400"> | <img src="/images/3028Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/3028K3.png?raw=true" width="400" height="400"> | <img src="/images/3028Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3028Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3028Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3028K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3028Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 ## ISO 800
-![](/images/1717.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1717.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/1717Noisy.png?raw=true" width="400" height="400"> | <img src="/images/1717Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/1717K3.png?raw=true" width="400" height="400"> | <img src="/images/1717Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1717Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1717Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1717K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1717Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
-![](/images/6438.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/6438.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/6438Noisy.png?raw=true" width="400" height="400"> | <img src="/images/6438Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/6438K3.png?raw=true" width="400" height="400"> |  |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/6438Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/6438Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/6438K3.png?raw=true" width="400" height="400"> |  |
 | **Pentax RAW development** |  |
 
 
-![](/images/9020.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/9020.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/9020Noisy.png?raw=true" width="400" height="400"> | <img src="/images/9020Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/9020K3.png?raw=true" width="400" height="400"> | <img src="/images/9020Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/9020Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/9020Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/9020K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/9020Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 ## ISO 1600
-![](/images/3429.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3429.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/3429Noisy.png?raw=true" width="400" height="400"> | <img src="/images/3429Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/3429K3.png?raw=true" width="400" height="400"> |  |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3429Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3429Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/3429K3.png?raw=true" width="400" height="400"> |  |
 | **Out of camera JPEG** |  |
 
 
-![](/images/1772.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1772.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/1772Noisy.png?raw=true" width="400" height="400"> | <img src="/images/1772Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1772Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/1772Result.png?raw=true" width="400" height="400"> |
 
 
 
 ## ISO 3200
-![](/images/2932.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/2932Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2932Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/2932K3.png?raw=true" width="400" height="400"> | <img src="/images/2932Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/2932_2Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2932_2Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/2932_2K3.png?raw=true" width="400" height="400"> | <img src="/images/2932_2Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932_2Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932_2Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932_2K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2932_2Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 ## ISO 6400
-![](/images/2593.png?raw=true)
+![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/2593Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2593Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/2593K3.png?raw=true" width="400" height="400"> | <img src="/images/2593Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/2593_2Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2593_2Result.png?raw=true" width="400" height="400"> |
-| <img src="/images/2593_2K3.png?raw=true" width="400" height="400"> | <img src="/images/2593_2Darktable.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593_2Noisy.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593_2Result.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593_2K3.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/2593_2Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 ## Lighthouse
 | Noisy simulated RAW at ISO 100 simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| <img src="/images/noisyLightHouseISO100.png?raw=true" width="400" height="400"> | <img src="/images/resultLightHouseISO100.png?raw=true" width="400" height="400"> |
-| <img src="/images/noisyLightHouseISO3200.png?raw=true" width="400" height="400"> | <img src="/images/resultLightHouseISO3200.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/noisyLightHouseISO100.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/resultLightHouseISO100.png?raw=true" width="400" height="400"> |
+| <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/noisyLightHouseISO3200.png?raw=true" width="400" height="400"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/resultLightHouseISO3200.png?raw=true" width="400" height="400"> |
 | **Noisy simulated RAW at ISO 3200 simple demosaicing** | **Result of CNN** |
 
