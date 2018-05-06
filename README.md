@@ -1,7 +1,7 @@
 # Joint demosaicing and denoising of RAW images with a CNN
 
 ### Motivation
-I own a Pentax K3 DSLR camera that I used in the past years to produce many many images, all shot in RAW mode. Over the time I implemented file reading routines in C# (thanks to [DCRAW!](https://www.cybercom.net/~dcoffin/dcraw/)) but never got better results out of my RAW images than the in-camera JPEG conversion or other RAW conversion tools (Adobe, [Darktable](https://www.darktable.org/), (RAWTherapee)[http://rawtherapee.com/], etc.), and this despite the fact that all I’m doing is about image processing in the one way or the other :)
+I own a Pentax K3 DSLR camera that I used in the past years to produce many many images, all shot in RAW mode. Over the time I implemented file reading routines in C# (thanks to [DCRAW!](https://www.cybercom.net/~dcoffin/dcraw/)) but never got better results out of my RAW images than the in-camera JPEG conversion or other RAW conversion tools (Adobe, [Darktable](https://www.darktable.org/), [RAWTherapee](http://rawtherapee.com/), etc.), and this despite the fact that all I’m doing is about image processing in the one way or the other :)
 For managedCuda I further implemented the wrapper for CUDNN despite that I actually had no real use for it by myself, as I was not that much interested in neural networks at that time. But it also got me thinking and I was looking for a real-world problem that might be interesting to play with and not some useless repetition of one of the many known networks already implemented thousands of times. 
 At GTC 2017, Orazio Gallo presented [“Image Restoration with Neural Networks”](http://on-demand.gputechconf.com/gtc/2017/presentation/s7447-orazio-gallo-image-restoration-with-neural-networks.pdf) together with a follow up paper by Nvidia Research [“Loss Functions for Image Restoration with Neural Networks”](http://research.nvidia.com/publication/loss-functions-image-restoration-neural-networks). And that was it: being useful on the one hand, I took this as an ideal testbed for getting familiar with CUDNN and neural networks on the other hand: I implemented the Convolutional Neuronal Network of said paper from scratch without any use of other libraries for NN like Caffe, etc. And finally, I achieve better results than what the market can offer me! At least in some cases. As the results are so promising, I came up with the idea of sharing the results.
 
@@ -43,7 +43,7 @@ It is not very deep, mainly because a fast inference speed is desired for the en
 CUDNN gives us efficient implementations for convolutional layers, but two main parts of the published network were missing: A parametric RELU activation with back-propagation is not given in CUDNN and the MS-SSIM error metric for the final layer is also not part of it. These two needed to be implemented in CUDA kernels. But together with these two additions, CUDNN and CUBLAS one can implement a fully functional CNN with relatively little amount of code lines in C#.
 The size of one image patch for training is 31x31 pixels. The MS-SSIM kernel is an approximation of the full error metric, same as in the original implementation by Nvidia: The error is only computed for the central pixel and not as an average of the entire patch to speed up computations. To avoid a bias towards the Bayer pattern color of this central pixel, I merged 2x2 patches to a group patch that is used for the first demosaicing step. Doing so, all four pixels of the Bayer pattern (RGGB) are once the central pixel of such a grouped patch. As input data I store these grouped patches as a tile of size 66x66 pixels as 2 pixels get lost at each border in demosaicing. 
 
-![A 2x2 image patch](/images/BayerPattern2.png?raw=true "A 2x2 image patch. Two pixels at the border get lost in demosaicing, the central pixel of each 31x31 pixel patch has different color")
+<img src="/images/BayerPattern2.png?raw=true" width="400" height="400" title="A 2x2 image patch. Two pixels at the border get lost in demosaicing, the central pixel of each 31x31 pixel patch has different color">
 
 In the beginning I experimented with simple bilinear interpolation of the missing color channels to get an input image for the CNN. With time I figured out that if I use a slightly better approach for demosaicing, a method that is aware of the edges in the image similar to the method used in many RAW conversion tools like DCRAW, I obtain slightly better results in the final image. Maybe the CNN is not deep enough to encode this step entirely, I’m not an expert for NN to identify the cause.
 All pixel values are normalized to the range 0..1 according to the maximum bit depth of the sensor (14-bit for my camera or 16384). Before feeding the network, the image values are shifted to -0.5..0.5 and then back to 0..1 after obtaining the result from the CNN.
@@ -99,8 +99,8 @@ Side note: all images are photos that I made (except lighthouse) and I make them
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/0888Noisy.png?raw=true) | ![](/images/0888Result.png?raw=true) |
-| ![](/images/0888K3.png?raw=true) | ![](/images/0888Darktable.png?raw=true) |
+| <img src="/images/0888Noisy.png?raw=true" width="400" height="400"> | <img src="/images/0888Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/0888K3.png?raw=true" width="400" height="400"> | <img src="/images/0888Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 Artifacts on bright light spots:
@@ -109,7 +109,7 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/7196Noisy.png?raw=true) | ![](/images/7196Result.png?raw=true) |
+| <img src="/images/7196Noisy.png?raw=true" width="400" height="400"> | <img src="/images/7196Result.png?raw=true" width="400" height="400"> |
 |  | Note the checker board artifacts |
 
 
@@ -118,15 +118,15 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/0902Noisy.png?raw=true) | ![](/images/0902Result.png?raw=true) |
+| <img src="/images/0902Noisy.png?raw=true" width="400" height="400"> | <img src="/images/0902Result.png?raw=true" width="400" height="400"> |
 
 
 ![](/images/2386.png?raw=true)
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/2386Noisy.png?raw=true) | ![](/images/2386Result.png?raw=true) |
-| ![](/images/2386K3.png?raw=true) | ![](/images/2386Darktable.png?raw=true) |
+| <img src="/images/2386Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2386Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/2386K3.png?raw=true" width="400" height="400"> | <img src="/images/2386Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
@@ -135,8 +135,8 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/3028Noisy.png?raw=true) | ![](/images/3028Result.png?raw=true) |
-| ![](/images/3028K3.png?raw=true) | ![](/images/3028Darktable.png?raw=true) |
+| <img src="/images/3028Noisy.png?raw=true" width="400" height="400"> | <img src="/images/3028Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/3028K3.png?raw=true" width="400" height="400"> | <img src="/images/3028Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
@@ -145,8 +145,8 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/1717Noisy.png?raw=true) | ![](/images/1717Result.png?raw=true) |
-| ![](/images/1717K3.png?raw=true) | ![](/images/1717Darktable.png?raw=true) |
+| <img src="/images/1717Noisy.png?raw=true" width="400" height="400"> | <img src="/images/1717Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/1717K3.png?raw=true" width="400" height="400"> | <img src="/images/1717Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
@@ -154,8 +154,8 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/6438Noisy.png?raw=true) | ![](/images/6438Result.png?raw=true) |
-| ![](/images/6438K3.png?raw=true) |  |
+| <img src="/images/6438Noisy.png?raw=true" width="400" height="400"> | <img src="/images/6438Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/6438K3.png?raw=true" width="400" height="400"> |  |
 | **Pentax RAW development** |  |
 
 
@@ -163,8 +163,8 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/9020Noisy.png?raw=true) | ![](/images/9020Result.png?raw=true) |
-| ![](/images/9020K3.png?raw=true) | ![](/images/9020Darktable.png?raw=true) |
+| <img src="/images/9020Noisy.png?raw=true" width="400" height="400"> | <img src="/images/9020Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/9020K3.png?raw=true" width="400" height="400"> | <img src="/images/9020Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 ## ISO 1600
@@ -172,8 +172,8 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/3429Noisy.png?raw=true) | ![](/images/3429Result.png?raw=true) |
-| ![](/images/3429K3.png?raw=true) |  |
+| <img src="/images/3429Noisy.png?raw=true" width="400" height="400"> | <img src="/images/3429Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/3429K3.png?raw=true" width="400" height="400"> |  |
 | **Out of camera JPEG** |  |
 
 
@@ -181,7 +181,7 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/1772Noisy.png?raw=true) | ![](/images/1772Result.png?raw=true) |
+| <img src="/images/1772Noisy.png?raw=true" width="400" height="400"> | <img src="/images/1772Result.png?raw=true" width="400" height="400"> |
 
 
 
@@ -190,15 +190,15 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/2932Noisy.png?raw=true) | ![](/images/2932Result.png?raw=true) |
-| ![](/images/2932K3.png?raw=true) | ![](/images/2932Darktable.png?raw=true) |
+| <img src="/images/2932Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2932Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/2932K3.png?raw=true" width="400" height="400"> | <img src="/images/2932Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/2932_2Noisy.png?raw=true) | ![](/images/2932_2Result.png?raw=true) |
-| ![](/images/2932_2K3.png?raw=true) | ![](/images/2932_2Darktable.png?raw=true) |
+| <img src="/images/2932_2Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2932_2Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/2932_2K3.png?raw=true" width="400" height="400"> | <img src="/images/2932_2Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
@@ -207,20 +207,21 @@ Artifacts on bright light spots:
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/2593Noisy.png?raw=true) | ![](/images/2593Result.png?raw=true) |
-| ![](/images/2593K3.png?raw=true) | ![](/images/2593Darktable.png?raw=true) |
+| <img src="/images/2593Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2593Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/2593K3.png?raw=true" width="400" height="400"> | <img src="/images/2593Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 
 | Noisy RAW image simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/2593_2Noisy.png?raw=true) | ![](/images/2593_2Result.png?raw=true) |
-| ![](/images/2593_2K3.png?raw=true) | ![](/images/2593_2Darktable.png?raw=true) |
+| <img src="/images/2593_2Noisy.png?raw=true" width="400" height="400"> | <img src="/images/2593_2Result.png?raw=true" width="400" height="400"> |
+| <img src="/images/2593_2K3.png?raw=true" width="400" height="400"> | <img src="/images/2593_2Darktable.png?raw=true" width="400" height="400"> |
 | **Pentax RAW development** | **Darktable** |
 
 ## Lighthouse
 | Noisy simulated RAW at ISO 100 simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
-| ![](/images/noisyLightHouseISO100.png?raw=true) | ![](/images/resultLightHouseISO100.png?raw=true) |
-| ![](/images/noisyLightHouseISO3200.png?raw=true) | ![](/images/resultLightHouseISO3200.png?raw=true) |
+| <img src="/images/noisyLightHouseISO100.png?raw=true" width="400" height="400"> | <img src="/images/resultLightHouseISO100.png?raw=true" width="400" height="400"> |
+| <img src="/images/noisyLightHouseISO3200.png?raw=true" width="400" height="400"> | <img src="/images/resultLightHouseISO3200.png?raw=true" width="400" height="400"> |
 | **Noisy simulated RAW at ISO 3200 simple demosaicing** | **Result of CNN** |
+
