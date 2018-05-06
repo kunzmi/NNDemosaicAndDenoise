@@ -11,7 +11,7 @@ But let’s start slowly...
 ### The problem
 The camera’s sensor cannot detect color of the light that falls on each pixel: Without color filters a sensor would give only a brightness or luminance information, i.e. a gray scale image. To obtain color information, every pixel is covered with a color filter that only lets light through of a certain color: Red, Green or Blue ([Wikipedia](https://en.wikipedia.org/wiki/Bayer_filter)). 
 
-![BayerPattern](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern.png?raw=true "Bayer pattern")
+![BayerPattern](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern.png "Bayer pattern")
 
 A full color image is than obtained by interpolating the surrounding pixels for missing color information in one pixel, a process called demosaicing. 
 Rendering of a full color image is further not only restricted by two missing color components per pixel but also by the amount of noise that every sensor has, noise that increases with amplified sensitivity of the sensor. Shooting photos at base ISO adds only little amount of noise for my camera, whereas at ISO 6400 noise is a severe image quality deterioration source.
