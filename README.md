@@ -11,7 +11,7 @@ But let’s start slowly...
 ### The problem
 The camera’s sensor cannot detect color of the light that falls on each pixel: Without color filters a sensor would give only a brightness or luminance information, i.e. a gray scale image. To obtain color information, every pixel is covered with a color filter that only lets light through of a certain color: Red, Green or Blue ([Wikipedia](https://en.wikipedia.org/wiki/Bayer_filter)). 
 
-![BayerPattern](/images/BayerPattern.png?raw=true "Bayer pattern")
+![BayerPattern](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern.png?raw=true "Bayer pattern")
 
 A full color image is than obtained by interpolating the surrounding pixels for missing color information in one pixel, a process called demosaicing. 
 Rendering of a full color image is further not only restricted by two missing color components per pixel but also by the amount of noise that every sensor has, noise that increases with amplified sensitivity of the sensor. Shooting photos at base ISO adds only little amount of noise for my camera, whereas at ISO 6400 noise is a severe image quality deterioration source.
@@ -35,7 +35,7 @@ To create simulated RAW files for the different ISO settings of my camera, I pro
 ### Convolutional Neuronal Network (CNN)
 The CNN as presented at GTC has the following layout:
 
-![CNN](/images/CNN.png?raw=true "CNN layout for joint demosaicing and denoising")
+![CNN](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/CNN.png?raw=true "CNN layout for joint demosaicing and denoising")
 
 It is not very deep, mainly because a fast inference speed is desired for the entire demosaicing and denoising step. The activation in the convolutional layers is parametric RELU activation.
 
@@ -43,7 +43,7 @@ It is not very deep, mainly because a fast inference speed is desired for the en
 CUDNN gives us efficient implementations for convolutional layers, but two main parts of the published network were missing: A parametric RELU activation with back-propagation is not given in CUDNN and the MS-SSIM error metric for the final layer is also not part of it. These two needed to be implemented in CUDA kernels. But together with these two additions, CUDNN and CUBLAS one can implement a fully functional CNN with relatively little amount of code lines in C#.
 The size of one image patch for training is 31x31 pixels. The MS-SSIM kernel is an approximation of the full error metric, same as in the original implementation by Nvidia: The error is only computed for the central pixel and not as an average of the entire patch to speed up computations. To avoid a bias towards the Bayer pattern color of this central pixel, I merged 2x2 patches to a group patch that is used for the first demosaicing step. Doing so, all four pixels of the Bayer pattern (RGGB) are once the central pixel of such a grouped patch. As input data I store these grouped patches as a tile of size 66x66 pixels as 2 pixels get lost at each border in demosaicing. 
 
-<img src="/images/BayerPattern2.png?raw=true" width="400" height="400" title="A 2x2 image patch. Two pixels at the border get lost in demosaicing, the central pixel of each 31x31 pixel patch has different color">
+<img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/BayerPattern2.png?raw=true" width="400" height="400" title="A 2x2 image patch. Two pixels at the border get lost in demosaicing, the central pixel of each 31x31 pixel patch has different color">
 
 In the beginning I experimented with simple bilinear interpolation of the missing color channels to get an input image for the CNN. With time I figured out that if I use a slightly better approach for demosaicing, a method that is aware of the edges in the image similar to the method used in many RAW conversion tools like DCRAW, I obtain slightly better results in the final image. Maybe the CNN is not deep enough to encode this step entirely, I’m not an expert for NN to identify the cause.
 All pixel values are normalized to the range 0..1 according to the maximum bit depth of the sensor (14-bit for my camera or 16384). Before feeding the network, the image values are shifted to -0.5..0.5 and then back to 0..1 after obtaining the result from the CNN.
@@ -72,17 +72,17 @@ Inference is implemented twice, once with CUDNN and once using the convolution i
 ## Results
 This is the mixed MS-SSIM/L1 error during training over 2000 epochs:
 
-![Mixed MS-SSIM/L1 error when training](/images/image006.png?raw=true "Mixed MS-SSIM/L1 error when training")
+![Mixed MS-SSIM/L1 error when training](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/image006.png?raw=true "Mixed MS-SSIM/L1 error when training")
 
 And compared to the test dataset (not seen during training), one can see that both sets match quiet well. Interestingly the error for ISO 400 is slightly better for test dataset than during training, an effect not seen for other ISO settings.
 
-![Comparison MS-SIMM / L1 error for training and test dataset](/images/image008.png?raw=true "Comparison MS-SIMM / L1 error for training and test dataset")
+![Comparison MS-SIMM / L1 error for training and test dataset](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/image008.png?raw=true "Comparison MS-SIMM / L1 error for training and test dataset")
 
 For completeness also the L1 and L2 errors for the test dataset:
 
-![L1 error on test dataset](/images/image010.png?raw=true "L1 error on test dataset")
+![L1 error on test dataset](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/image010.png?raw=true "L1 error on test dataset")
 
-![L2 error on test dataset](/images/image012.png?raw=true "L2 error on test dataset")
+![L2 error on test dataset](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/image012.png?raw=true "L2 error on test dataset")
 
 To compare with other methods, I prefer to not compute multiple error norms and compete with pure numbers. The impression of a certain result has always some personal bias, why I’ll show only the resulting images, sometimes with a comparison from other methods, sometimes without. In most cases the results are just stunning and at least have a similar image quality than darktable or in-camera JPEGs. I did not focus on properly tuning the tone maps, I just use the one default one that matches quiet well most of the times, the only interest is the quality of debayering and denoising, not the color rendering.
 
