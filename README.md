@@ -225,6 +225,8 @@ Artifacts on bright light spots:
 | **Pentax RAW development** | **Darktable** |
 
 ## Lighthouse
+(Kodak image set)
+
 | Noisy simulated RAW at ISO 100 simple demosaicing | Result of CNN |
 |:----------------------------------:|:----------------------------------:|
 | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/noisyLightHouseISO100.png?raw=true" width="400" height="600"> | <img src="https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/resultLightHouseISO100.png?raw=true" width="400" height="600"> |
