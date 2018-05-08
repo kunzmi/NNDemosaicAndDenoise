@@ -100,6 +100,8 @@ If the camera performed corrections for the lens used, I reprocessed the RAW ima
 
 Side note: all images are photos that I made (except lighthouse) and I make them publicly available as RAW files so that everyone can play with the neural network, but for nothing more. I don’t grant here any license for reuse, publishing on other places or any modifications. If you like them, feel free to let me know what you want to do with them, I usually don’t bite :)
 
+Click on images for larger view.
+
 ## ISO 100
 ![](https://raw.githubusercontent.com/kunzmi/NNDemosaicAndDenoise/gh-pages/images/0888.png?raw=true)
 
