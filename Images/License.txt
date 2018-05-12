@@ -1,0 +1,5 @@
+I provide the RAW files only for the purpose of testing so that you
+can play with the neural network with the same images that I used in
+the results section of the project description. You're NOT granted
+any usage further than that testing and you're NOT allowed to publish
+the images in whole or in parts somewhere else.
